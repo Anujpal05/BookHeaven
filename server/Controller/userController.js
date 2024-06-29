@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { generateToken } from "../auth/auth.js";
 
+//Register Controller
 export const registeredController = async (req, res) => {
   try {
     const { username, email, password, address } = req.body;
@@ -70,6 +71,7 @@ export const registeredController = async (req, res) => {
   }
 };
 
+//Login controller
 export const loginController = async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -108,6 +110,34 @@ export const loginController = async (req, res) => {
         return res.status(401).json({ message: "Invalid credentials!" });
       }
     });
+  } catch (error) {
+    return res.status(500).json({ message: "Internal server error!" });
+  }
+};
+
+//Get user information
+export const getUserData = async (req, res) => {
+  try {
+    const { id } = req.headers;
+    const userData = await User.findById(id).select("-password");
+    if (!userData) {
+      return res.status(404).json({ message: "Not found!" });
+    }
+    return res
+      .status(200)
+      .json({ message: "Getting user Information!", userData });
+  } catch (error) {
+    return res.status(500).json({ message: "Internal server error!" });
+  }
+};
+
+//Update User address
+export const updateUserAddress = async (req, res) => {
+  try {
+    const { id } = req.headers;
+    const { address } = req.body;
+    const userAddress = await User.findByIdAndUpdate(id, { address: address });
+    return res.status(200).json({ message: "Address Updated successfully!" });
   } catch (error) {
     return res.status(500).json({ message: "Internal server error!" });
   }
