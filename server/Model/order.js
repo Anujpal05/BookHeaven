@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const orderSchema = new mongoose.Schema(
   {
-    username: {
+    user: {
       type: mongoose.Types.ObjectId,
       ref: "user",
     },
@@ -13,7 +13,7 @@ const orderSchema = new mongoose.Schema(
     status: {
       type: String,
       default: "Ordered Placed",
-      enum: ["Orderd Placed", "Out Of Delivery", "Delivered", "Cancelled"],
+      enum: ["Orderd Placed", "Out for Delivery", "Delivered", "Cancelled"],
     },
   },
   { timestamps: true }
