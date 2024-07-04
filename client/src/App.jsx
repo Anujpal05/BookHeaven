@@ -8,6 +8,7 @@ import Cart from './pages/Cart';
 import Profile from './pages/Profile';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
+import ViewBookDetails from './pages/ViewBookDetails';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route exact path='/profile' element={<Profile />} />
         <Route exact path='/signup' element={<SignUp />} />
         <Route exact path='/signin' element={<SignIn />} />
+        <Route path="/view-book-details/:id" element={<ViewBookDetails />} />
       </Routes>
       <Footer />
     </div>

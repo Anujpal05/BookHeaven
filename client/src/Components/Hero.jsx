@@ -16,6 +16,7 @@ function Hero() {
             </div>
 
         </div>
+
     )
 }
 

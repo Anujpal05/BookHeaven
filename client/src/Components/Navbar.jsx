@@ -10,7 +10,7 @@ function Navbar() {
 
     return (
         <>
-            <div className='flex bg-zinc-800 text-white md:px-8 md:py-4 px-4 py-2 items-center justify-between'>
+            <div className='flex bg-zinc-800 text-white md:px-8 md:py-4 px-4 py-2 items-center justify-between fixed w-full' >
                 <div className=' flex items-center gap-2'>
                     <img src="https://cdn-icons-png.flaticon.com/128/10433/10433049.png" alt="Book Logo" className='h-10' />
                     <NavLink to={"/"} className=' text-2xl font-semibold'>Bookheavean</NavLink>
@@ -32,7 +32,7 @@ function Navbar() {
                     <IoReorderThreeOutline />
                 </button>
             </div>
-            <div className={`${mobileNav} bg-zinc-800 px-2 absolute h-screen w-3/6 md:hidden flex border-2 border-l-0 border-t-0 border-zinc-700 py-4 shadow-lg shadow-zinc-600`} >
+            <div className={`${mobileNav} bg-zinc-800 px-2 absolute top-14 h-screen w-3/6 md:hidden flex border-2 border-l-0 border-t-0 border-zinc-700 py-4 shadow-lg shadow-zinc-600 `} >
                 <div className=' flex flex-col w-full gap-5 px-5 py-3 bg-zinc-800 text-white rounded-b-xl z-40 text-xl '>
                     <NavLink to={"/"} className=' hover:text-blue-400 transition-all ' onClick={() => mobileNav === "hidden" ? setmobileNav("block") : setmobileNav("hidden")}>Home</NavLink>
                     <NavLink to={"/all-books"} className=' hover:text-blue-400 transition-all ' onClick={() => mobileNav === "hidden" ? setmobileNav("block") : setmobileNav("hidden")}>All Books</NavLink>

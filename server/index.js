@@ -1,6 +1,7 @@
 import express from "express";
 import mongoDB from "./conn/conn.js";
 import dotenv from "dotenv";
+import cors from "cors";
 import userRouter from "./Router/userRoute.js";
 import bookRouter from "./Router/bookRoute.js";
 import favRouter from "./Router/favRoute.js";
@@ -12,6 +13,7 @@ const port = process.env.PORT || 4001;
 
 //middleware
 app.use(express.json());
+app.use(cors());
 
 //connected to database
 mongoDB();
