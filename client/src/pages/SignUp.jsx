@@ -1,21 +1,40 @@
 import React from 'react';
 import { useForm } from "react-hook-form"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import bgAuthImage from "../assets/bgAuth.png";
+import axios from 'axios';
 
 function SignUp() {
+
+    const navigate = useNavigate();
 
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm()
-    const onSubmit = (data) => console.log(data)
+    const onSubmit = async (data) => {
+        try {
+            const userInfo = {
+                username: data.username,
+                email: data.email,
+                password: data.password,
+                address: data.address
+            }
+
+            const response = await axios.post("http://localhost:4000/api/v1/signup", userInfo);
+            alert("SignUp successfully!")
+            navigate("/signin");
+
+        } catch (error) {
+            alert(error.response.data.message)
+        }
+    }
 
 
     return (
         <div className=" bg-zinc-900 flex justify-center items-center min-h-screen gap-56">
-            <div className=' hidden md:flex'>
+            <div className=' hidden lg:flex'>
                 <img src={bgAuthImage} alt='Register' />
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className=' bg-zinc-800 flex flex-col justify-center p-7 gap-4 rounded-xl w-full m-5 mt-20 md:w-3/12 shadow-sm shadow-zinc-500 '>

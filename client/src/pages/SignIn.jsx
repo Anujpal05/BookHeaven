@@ -1,16 +1,41 @@
 import React from 'react';
 import { useForm } from "react-hook-form"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import bgAuthImage from "../assets/bgAuth.png";
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { authActions } from '../store/auth';
 
 function SignIn() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm()
-    const onSubmit = (data) => console.log(data)
+    const onSubmit = async (data) => {
+        try {
+            const userInfo = {
+                username: data.username,
+                password: data.password
+            }
+
+            const response = await axios.post("http://localhost:4000/api/v1/signin", userInfo);
+            alert("LogIn Successfully!");
+            dispatch(authActions.login());
+            dispatch(authActions.changeRole(response.data.role))
+            navigate('/profile');
+
+            localStorage.setItem("id", response.data.id);
+            localStorage.setItem("role", response.data.role);
+            localStorage.setItem("token", response.data.token);
+            console.log(response)
+        } catch (error) {
+            alert(error.response.data.message)
+        }
+    }
 
 
     return (
