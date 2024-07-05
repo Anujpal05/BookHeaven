@@ -21,7 +21,7 @@ function RecentlyAdded() {
         <div className=' md:mt-8 px-4'>
             <h4 className=' text-3xl text-yellow-100'>Recently added books</h4>
             {
-                loader && <div className=' w-full flex justify-center items-center p-10 h-96 '>
+                loader && <div className=' w-full flex justify-center items-center p-10 h-96 z-10 '>
                     <Hourglass
                         visible={loader}
                         height="90"

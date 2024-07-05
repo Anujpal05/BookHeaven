@@ -32,7 +32,7 @@ function Navbar() {
                     <IoReorderThreeOutline />
                 </button>
             </div>
-            <div className={`${mobileNav} bg-zinc-800 px-2 absolute top-14 h-screen w-3/6 md:hidden flex border-2 border-l-0 border-t-0 border-zinc-700 py-4 shadow-lg shadow-zinc-600 `} >
+            <div className={`${mobileNav} bg-zinc-800 px-2 fixed top-14 z-50 rounded-r-2xl h-screen w-3/6 md:hidden flex border-2 border-l-0 border-t-0 border-zinc-700 py-4 shadow-lg shadow-zinc-600 `} >
                 <div className=' flex flex-col w-full gap-5 px-5 py-3 bg-zinc-800 text-white rounded-b-xl z-40 text-xl '>
                     <NavLink to={"/"} className=' hover:text-blue-400 transition-all ' onClick={() => mobileNav === "hidden" ? setmobileNav("block") : setmobileNav("hidden")}>Home</NavLink>
                     <NavLink to={"/all-books"} className=' hover:text-blue-400 transition-all ' onClick={() => mobileNav === "hidden" ? setmobileNav("block") : setmobileNav("hidden")}>All Books</NavLink>
