@@ -31,7 +31,7 @@ function SignIn() {
             localStorage.setItem("id", response.data.id);
             localStorage.setItem("role", response.data.role);
             localStorage.setItem("token", response.data.token);
-            console.log(response)
+            
         } catch (error) {
             alert(error.response.data.message)
         }

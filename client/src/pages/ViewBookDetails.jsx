@@ -3,12 +3,20 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { GrLanguage } from "react-icons/gr";
 import { Hourglass } from "react-loader-spinner"
+import { FaHeart } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
+import { MdEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
+import { useSelector } from 'react-redux';
+
 
 
 function ViewBookDetails() {
     const { id } = useParams();
     const [Data, setData] = useState();
     const [loader, setloader] = useState(true);
+    const isLogin = useSelector((state) => state.auth.isLogin);
+    const role = useSelector((state) => state.auth.role)
 
     useEffect(() => {
         const fetch = async () => {
@@ -38,10 +46,21 @@ function ViewBookDetails() {
 
                 {Data &&
                     <>
-                        <div className=' bg-zinc-800 p-4  rounded w-full md:w-3/6 flex justify-center items-center'>
-                            <div className=' md:p-5 bg-zinc-900'>
-                                <img src={Data.url} alt='book' />
+                        <div className='    w-full md:w-3/6 flex justify-around items-center'>
+                            <div className='bg-zinc-800 p-4 rounded flex flex-col md:flex-row justify-evenly w-full'>
+                                <div className=' md:p-5 bg-zinc-900 flex justify-center'>
+                                    <img src={Data.url} alt='book' />
+                                </div>
+                                {isLogin && role === "user" && <div className=" flex md:flex-col md:justify-normal justify-between gap-8 text-4xl px-4 md:mt-0 mt-4">
+                                    <button className=' text-red-500 hover:text-red-600 hover:bg-zinc-200 transition-all duration-300 outline-none bg-zinc-100 rounded-full p-3 text-center'><FaHeart /></button>
+                                    <button className=' text-zinc-100 hover:text-zinc-300 hover:bg-blue-600 transition-all duration-300 outline-none bg-blue-500 rounded-full p-3'><FaShoppingCart /></button>
+                                </div>}
+                                {isLogin && role === "admin" && <div className=" flex md:flex-col md:justify-normal justify-between gap-8 text-4xl px-4 md:mt-0 mt-4">
+                                    <button className='  text-zinc-100 hover:text-zinc-300 hover:bg-blue-700 transition-all duration-300 outline-none bg-blue-500 rounded-full p-3 text-center'><MdEdit /></button>
+                                    <button className=' text-white-100 hover:text-zinc-200   transition-all duration-300 outline-none bg-red-500 rounded-full p-3 hover:bg-red-700'><MdDelete /></button>
+                                </div>}
                             </div>
+
                         </div>
                         <div className=' w-full md:w-3/6 md:p-4'>
                             <h1 className=' text-4xl text-zinc-400 font-semibold'>{Data.title}</h1>
