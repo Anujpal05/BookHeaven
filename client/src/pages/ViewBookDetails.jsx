@@ -16,7 +16,12 @@ function ViewBookDetails() {
     const [Data, setData] = useState();
     const [loader, setloader] = useState(true);
     const isLogin = useSelector((state) => state.auth.isLogin);
-    const role = useSelector((state) => state.auth.role)
+    const role = useSelector((state) => state.auth.role);
+    const headers = {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+        id: localStorage.getItem("id"),
+        bookid: id
+    }
 
     useEffect(() => {
         const fetch = async () => {
@@ -26,6 +31,24 @@ function ViewBookDetails() {
         }
         fetch();
     }, [])
+
+    const handleFavourites = async () => {
+        try {
+            const response = await axios.put("http://localhost:4000/api/v1/add-fav-book", {}, { headers });
+            alert(response.data.message)
+        } catch (error) {
+            alert(error.response.data.message)
+        }
+    }
+
+    const handleCart = async () => {
+        try {
+            const response = await axios.put("http://localhost:4000/api/v1/add-to-cart", {}, { headers });
+            alert(response.data.message)
+        } catch (error) {
+            alert(error.response.data.message)
+        }
+    }
 
     return (
         <>
@@ -52,8 +75,8 @@ function ViewBookDetails() {
                                     <img src={Data.url} alt='book' />
                                 </div>
                                 {isLogin && role === "user" && <div className=" flex md:flex-col md:justify-normal justify-between gap-8 text-4xl px-4 md:mt-0 mt-4">
-                                    <button className=' text-red-500 hover:text-red-600 hover:bg-zinc-200 transition-all duration-300 outline-none bg-zinc-100 rounded-full p-3 text-center'><FaHeart /></button>
-                                    <button className=' text-zinc-100 hover:text-zinc-300 hover:bg-blue-600 transition-all duration-300 outline-none bg-blue-500 rounded-full p-3'><FaShoppingCart /></button>
+                                    <button className=' text-red-500 hover:text-red-600 hover:bg-zinc-200 transition-all duration-300 outline-none bg-zinc-100 rounded-full p-3 text-center' onClick={handleFavourites}><FaHeart /></button>
+                                    <button className=' text-zinc-100 hover:text-zinc-300 hover:bg-blue-600 transition-all duration-300 outline-none bg-blue-500 rounded-full p-3' onClick={handleCart}><FaShoppingCart /></button>
                                 </div>}
                                 {isLogin && role === "admin" && <div className=" flex md:flex-col md:justify-normal justify-between gap-8 text-4xl px-4 md:mt-0 mt-4">
                                     <button className='  text-zinc-100 hover:text-zinc-300 hover:bg-blue-700 transition-all duration-300 outline-none bg-blue-500 rounded-full p-3 text-center'><MdEdit /></button>
