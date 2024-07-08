@@ -6,13 +6,11 @@ export const placeOrder = async (req, res) => {
   try {
     const { id } = req.headers;
     const { order } = req.body;
-
     for (const orderData of order) {
       const newOrder = new Order({ user: id, book: orderData._id });
       const orderDataFromDB = await newOrder.save();
-
       if (!orderDataFromDB) {
-        return res.status(404).json({ message: "Error while placed Order!" });
+        return res.status(400).json({ message: "Error while save order!" });
       }
 
       //saving order in user model
@@ -40,7 +38,7 @@ export const getUserOrders = async (req, res) => {
     });
 
     const ordersData = await userData.orders.reverse();
-    if (!orderData) {
+    if (!ordersData) {
       return res.status(200).json({ message: "You have no any order!" });
     }
 

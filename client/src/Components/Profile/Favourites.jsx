@@ -43,7 +43,7 @@ function Favourites() {
                 </div>
             }
             {
-                favouriteBooks && favouriteBooks.length == 0 && <div className=' flex flex-col justify-center items-center h-[85vh] gap-5 '>
+                favouriteBooks && favouriteBooks.length == 0 && <div className=' flex flex-col justify-center items-center h-auto md:h-[85vh] gap-5 '>
                     <h1 className=' text-3xl md:text-5xl text-zinc-500 font-semibold'>No favourite books</h1>
                     <img src={star} alt="star" className=' h-20 md:h-24' />
                 </div>

@@ -10,9 +10,13 @@ function AllBook() {
 
     useEffect(() => {
         const fetch = async () => {
-            const response = await axios.get("http://localhost:4000/api/v1/get-all-books");
-            setData(response.data.books);
-            setloader(false);
+            try {
+                const response = await axios.get("http://localhost:4000/api/v1/get-all-books");
+                setData(response.data.books);
+                setloader(false);
+            } catch (error) {
+                console.log(error)
+            }
         }
         fetch();
     }, [])

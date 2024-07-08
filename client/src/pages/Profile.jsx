@@ -42,7 +42,7 @@ function Profile() {
                     />
                 </div>
             }
-            <div className=' bg-zinc-900  flex flex-col md:flex-row text-white pt-24 py-6 px-10 gap-10'>
+            <div className=' bg-zinc-900  flex flex-col md:flex-row text-white pt-24 py-6 px-10 gap-10 w-fit min-w-full min-h-screen'>
                 {
                     Profile && <><div className=' w-full md:h-screen lg:w-1/6 md:w-1/4'>
                         <Sidebar data={Profile} />
