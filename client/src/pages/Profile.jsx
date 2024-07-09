@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import { Hourglass } from "react-loader-spinner"
-import Sidebar from '../Components/Sidebar';
 import { Outlet } from 'react-router-dom';
+import Sidebar from '../Components/Profile/Sidebar';
+import MobileNav from '../Components/Profile/MobileNav';
 
 function Profile() {
     const [Profile, setProfile] = useState();
@@ -48,6 +49,7 @@ function Profile() {
                         <Sidebar data={Profile} />
                     </div>
                         <div className=' w-full lg:w-5/6 md:w-3/4'>
+                            <div className=' flex md:hidden w-screen mb-3'><MobileNav /></div>
                             <Outlet />
                         </div></>
                 }

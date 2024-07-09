@@ -31,7 +31,7 @@ function UserOrderHistory() {
     return (
         <>
 
-            {loader && <div className='  w-full flex justify-center items-center p-10 h-96 '>
+            {loader && <div className='  w-full flex justify-center items-center p-10 h-[80vh]'>
                 <Hourglass
                     visible={loader}
                     height="100"

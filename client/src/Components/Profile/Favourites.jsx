@@ -30,7 +30,7 @@ function Favourites() {
     return (
         <div className=''>
             {
-                loader && <div className=' w-full flex justify-center items-center p-10 h-96 '>
+                loader && <div className=' w-full flex justify-center items-center p-10 h-[85vh] '>
                     <Hourglass
                         visible={loader}
                         height="90"

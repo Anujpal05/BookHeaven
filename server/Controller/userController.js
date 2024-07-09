@@ -137,6 +137,9 @@ export const updateUserAddress = async (req, res) => {
     const { id } = req.headers;
     const { address } = req.body;
     const userAddress = await User.findByIdAndUpdate(id, { address: address });
+    if (!userAddress) {
+      return res.status(404).json({ message: "Address is not Updated!" });
+    }
     return res.status(200).json({ message: "Address Updated successfully!" });
   } catch (error) {
     return res.status(500).json({ message: "Internal server error!" });
