@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { GrLanguage } from "react-icons/gr";
 import { Hourglass } from "react-loader-spinner"
 import { FaHeart } from "react-icons/fa";
@@ -17,6 +17,7 @@ function ViewBookDetails() {
     const [loader, setloader] = useState(true);
     const isLogin = useSelector((state) => state.auth.isLogin);
     const role = useSelector((state) => state.auth.role);
+    const navigate = useNavigate();
     const headers = {
         authorization: `Bearer ${localStorage.getItem("token")}`,
         id: localStorage.getItem("id"),
@@ -50,6 +51,18 @@ function ViewBookDetails() {
         }
     }
 
+    const handleDelete = async () => {
+        try {
+            if (confirm("Are you sure to delete this book?")) {
+                const response = await axios.delete("http://localhost:4000/api/v1/delete-book", { headers });
+                alert(response.data.message)
+                navigate('/all-books');
+            }
+        } catch (error) {
+            alert(error.response.data.message);
+        }
+    }
+
     return (
         <>
             <div className=' bg-zinc-900 px-8 md:px-12 py-24 flex flex-col md:flex-row gap-4 text-white min-h-[90vh]'>
@@ -79,8 +92,8 @@ function ViewBookDetails() {
                                     <button className=' text-zinc-100 hover:text-zinc-300 hover:bg-blue-600 transition-all duration-300 outline-none bg-blue-500 rounded-full p-3' onClick={handleCart}><FaShoppingCart /></button>
                                 </div>}
                                 {isLogin && role === "admin" && <div className=" flex md:flex-col md:justify-normal justify-between gap-8 text-4xl px-4 md:mt-0 mt-4">
-                                    <button className='  text-zinc-100 hover:text-zinc-300 hover:bg-blue-700 transition-all duration-300 outline-none bg-blue-500 rounded-full p-3 text-center'><MdEdit /></button>
-                                    <button className=' text-white-100 hover:text-zinc-200   transition-all duration-300 outline-none bg-red-500 rounded-full p-3 hover:bg-red-700'><MdDelete /></button>
+                                    <button className='  text-zinc-100 hover:text-zinc-300 hover:bg-blue-700 transition-all duration-300 outline-none bg-blue-500 rounded-full p-3 text-center' onClick={() => navigate(`/update-book/${id}`)}><MdEdit /></button>
+                                    <button className=' text-white-100 hover:text-zinc-200   transition-all duration-300 outline-none bg-red-500 rounded-full p-3 hover:bg-red-700' onClick={handleDelete}><MdDelete /></button>
                                 </div>}
                             </div>
 

@@ -14,6 +14,9 @@ import { authActions } from './store/auth';
 import Favourites from './Components/Profile/Favourites';
 import UserOrderHistory from './Components/Profile/UserOrderHistory';
 import Setting from './Components/Profile/Setting';
+import AllOrders from './pages/AllOrders';
+import AddBook from './pages/AddBook';
+import UpdateBook from './pages/UpdateBook';
 
 
 function App() {
@@ -37,10 +40,19 @@ function App() {
         <Route exact path='/all-books' element={<AllBook />} />
         <Route exact path='/cart' element={<Cart />} />
         <Route exact path='/profile' element={<Profile />} >
-          <Route index element={<Favourites />} />
-          <Route path='/profile/orderHistory' element={<UserOrderHistory />} />
-          <Route path='/profile/setting' element={<Setting />} />
+          {role == "user" && <>
+            <Route index element={<Favourites />} />
+            <Route path='/profile/orderHistory' element={<UserOrderHistory />} />
+            <Route path='/profile/setting' element={<Setting />} />
+          </>}
+          {role == "admin" && <>
+            <Route index element={<AllOrders />} />
+            <Route path='/profile/add-book' element={<AddBook />} />
+          </>}
         </Route>
+        {role == 'admin' && <>
+          <Route path='/update-book/:id' element={<UpdateBook />} />
+        </>}
         <Route exact path='/signup' element={<SignUp />} />
         <Route exact path='/signin' element={<SignIn />} />
         <Route path="/view-book-details/:id" element={<ViewBookDetails />} />

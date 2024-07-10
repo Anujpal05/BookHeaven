@@ -9,6 +9,7 @@ function Navbar() {
 
     const [mobileNav, setmobileNav] = useState("hidden");
     const isLogin = useSelector((state) => state.auth.isLogin);
+    const role = useSelector((state) => state.auth.role);
 
     return (
         <>
@@ -21,8 +22,10 @@ function Navbar() {
                     <div className=' hidden md:flex md:items-center gap-4'>
                         <NavLink to={"/"} className=' hover:text-blue-400 transition-all duration-300'>Home</NavLink>
                         <NavLink to={"/all-books"} className=' hover:text-blue-400 transition-all duration-300'>All Books</NavLink>
-                        {isLogin && (<> <NavLink to={"/cart"} className=' hover:text-blue-400 transition-all duration-300'>Cart</NavLink>
+                        {isLogin && role == "user" && (<> <NavLink to={"/cart"} className=' hover:text-blue-400 transition-all duration-300'>Cart</NavLink>
                             <NavLink to={"/profile"} className=' px-2 py-1 border bg-blue-500 rounded hover:bg-white hover:text-zinc-800 transition-all duration-300'>Profile</NavLink></>)}
+                        {isLogin && role == "admin" && (<>
+                            <NavLink to={"/profile"} className=' px-2 py-1 border bg-blue-500 rounded hover:bg-white hover:text-zinc-800 transition-all duration-300'>Admin Profile</NavLink></>)}
                     </div>
                     {
                         !isLogin && <div className=' hidden md:flex gap-4'>
