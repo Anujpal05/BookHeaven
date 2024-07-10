@@ -14,9 +14,9 @@ import { authActions } from './store/auth';
 import Favourites from './Components/Profile/Favourites';
 import UserOrderHistory from './Components/Profile/UserOrderHistory';
 import Setting from './Components/Profile/Setting';
-import AllOrders from './pages/AllOrders';
 import AddBook from './pages/AddBook';
 import UpdateBook from './pages/UpdateBook';
+import AllOrders from './Components/Profile/AllOrders';
 
 
 function App() {
