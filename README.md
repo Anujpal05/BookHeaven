@@ -44,19 +44,19 @@ Book Heaven is a web application that allows users to browse books, see book det
     cd ../server
     npm install
     ```
-4. Create a `.env` file in the `backend` directory and add your environment variables:
+4. Create a `.env` file in the `server` directory and add your environment variables:
     ```env
     MONGO_URL=your_mongo_db_uri
     SECRET_KEY=your_jwt_secret
     ```
 5. Start the backend server:
     ```bash
-    cd client
+    cd server
     npm start
     ```
 6. Start the frontend server:
     ```bash
-    cd server
+    cd client
     npm start
     ```
 
