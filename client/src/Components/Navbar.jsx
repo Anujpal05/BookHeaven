@@ -14,9 +14,9 @@ function Navbar() {
     return (
         <>
             <div className='flex bg-zinc-800 text-white md:px-8 md:py-4 px-4 py-2 items-center justify-between fixed w-full' >
-                <div className=' flex items-center gap-2'>
+                <div className=' flex items-center gap-2 outline-none'>
                     <img src="https://cdn-icons-png.flaticon.com/128/10433/10433049.png" alt="Book Logo" className='h-10' />
-                    <NavLink to={"/"} className=' text-2xl font-semibold'>Bookheavean</NavLink>
+                    <NavLink to={"/"} className=' text-2xl font-semibold outline-none'>Bookheavean</NavLink>
                 </div>
                 <div className=' flex items-center gap-4'>
                     <div className=' hidden md:flex md:items-center gap-4'>
@@ -39,16 +39,20 @@ function Navbar() {
                     <IoReorderThreeOutline />
                 </button>
             </div>
-            <div className={`${mobileNav} bg-zinc-800 px-2 fixed top-14 z-50 rounded-r-2xl h-screen w-3/6 md:hidden flex border-2 border-l-0 border-t-0 border-zinc-700 py-4 shadow-lg shadow-zinc-600 `} >
-                <div className=' flex flex-col w-full gap-5 px-5 py-3 bg-zinc-800 text-white rounded-b-xl z-40 text-xl '>
-                    <NavLink to={"/"} className=' hover:text-blue-400 transition-all ' onClick={() => mobileNav === "hidden" ? setmobileNav("block") : setmobileNav("hidden")}>Home</NavLink>
-                    <NavLink to={"/all-books"} className=' hover:text-blue-400 transition-all ' onClick={() => mobileNav === "hidden" ? setmobileNav("block") : setmobileNav("hidden")}>All Books</NavLink>
-                    {isLogin && <>   <NavLink to={"/cart"} className=' hover:text-blue-400 transition-all ' onClick={() => mobileNav === "hidden" ? setmobileNav("block") : setmobileNav("hidden")}>Cart</NavLink>
-                        <NavLink to={"/profile"} className=' hover:text-blue-400 transition-all ' onClick={() => mobileNav === "hidden" ? setmobileNav("block") : setmobileNav("hidden")}>Profile</NavLink></>}
-                    {!isLogin && <><NavLink to={"/signin"} className=' px-2 py-1 border border-blue-500 rounded hover:text-zinc-800 text-center hover:bg-white transition-all ' onClick={() => mobileNav === "hidden" ? setmobileNav("block") : setmobileNav("hidden")}>SignIn</NavLink>
-                        <NavLink to={"/signup"} className=' px-2 py-1 border bg-blue-500 rounded text-center hover:bg-white hover:text-zinc-800 transition-all ' onClick={() => mobileNav === "hidden" ? setmobileNav("block") : setmobileNav("hidden")}>SignUp</NavLink></>}
+            <div className={`${mobileNav} bg-zinc-900 fixed top-14 left-0  rounded-r-2xl h-screen w-full md:hidden flex  opacity-90  `} >
+                <div className=' h-full w-2/5 flex  bg-zinc-800 opacity-100    '>
+                    <div className=' flex flex-col pt-10 w-full h-screen gap-8 font-semibold px-5 py-3 text-white rounded-b-xl z-40 text-xl '>
+                        <NavLink to={"/"} className=' hover:text-blue-400 transition-all ' onClick={() => mobileNav === "hidden" ? setmobileNav("block") : setmobileNav("hidden")}>Home</NavLink>
+                        <NavLink to={"/all-books"} className=' hover:text-blue-400 transition-all ' onClick={() => mobileNav === "hidden" ? setmobileNav("block") : setmobileNav("hidden")}>All Books</NavLink>
+                        {isLogin && role == "user" && (<>   <NavLink to={"/cart"} className=' hover:text-blue-400 transition-all ' onClick={() => mobileNav === "hidden" ? setmobileNav("block") : setmobileNav("hidden")}>Cart</NavLink>
+                            <NavLink to={"/profile"} className=' hover:text-blue-400 transition-all ' onClick={() => mobileNav === "hidden" ? setmobileNav("block") : setmobileNav("hidden")}>Profile</NavLink></>)}
+                        {isLogin && role === "admin" && <><NavLink to={"/profile"} className=' hover:text-blue-400 transition-all ' onClick={() => mobileNav === "hidden" ? setmobileNav("block") : setmobileNav("hidden")}>Admin Profile</NavLink></>}
+                        {!isLogin && <><NavLink to={"/signin"} className=' px-2 py-1 border border-blue-500 rounded hover:text-zinc-800 text-center hover:bg-white transition-all ' onClick={() => mobileNav === "hidden" ? setmobileNav("block") : setmobileNav("hidden")}>SignIn</NavLink>
+                            <NavLink to={"/signup"} className=' px-2 py-1 border bg-blue-500 rounded text-center hover:bg-white hover:text-zinc-800 transition-all ' onClick={() => mobileNav === "hidden" ? setmobileNav("block") : setmobileNav("hidden")}>SignUp</NavLink></>}
+                    </div>
+                    <button className=' text-white p-3 text-2xl h-5 hover:text-gray-500' onClick={() => mobileNav === "hidden" ? setmobileNav("block") : setmobileNav("hidden")}><RxCross2 /></button>
                 </div>
-                <button className=' text-white p-1 text-2xl h-5 hover:text-gray-500' onClick={() => mobileNav === "hidden" ? setmobileNav("block") : setmobileNav("hidden")}><RxCross2 /></button>
+
             </div>
         </>
     )

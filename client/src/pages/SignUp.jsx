@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from "react-hook-form"
 import { Link, useNavigate } from 'react-router-dom';
 import bgAuthImage from "../assets/bgAuth.png";
+import toast from 'react-hot-toast';
 import axios from 'axios';
 
 function SignUp() {
@@ -13,6 +14,7 @@ function SignUp() {
         handleSubmit,
         formState: { errors },
     } = useForm()
+
     const onSubmit = async (data) => {
         try {
             const userInfo = {
@@ -23,11 +25,11 @@ function SignUp() {
             }
 
             const response = await axios.post("http://localhost:4000/api/v1/signup", userInfo);
-            alert("SignUp successfully!")
+            toast.success("SignUp successfully!")
             navigate("/signin");
 
         } catch (error) {
-            alert(error.response.data.message)
+            toast.error(error.response.data.message)
         }
     }
 

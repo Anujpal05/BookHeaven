@@ -47,7 +47,6 @@ export const updateBook = async (req, res) => {
       author: req.body.author,
       language: req.body.language,
     });
-
     if (!book) {
       return res.status(400).json({ message: "Error while Updating!" });
     }

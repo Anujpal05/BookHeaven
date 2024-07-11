@@ -4,6 +4,7 @@ import { AiFillDelete } from "react-icons/ai";
 import { Hourglass } from "react-loader-spinner";
 import cartImg from '../assets/emptyCart.png';
 import { Link, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 function Cart() {
     const [cartBooks, setcartBooks] = useState();
@@ -22,7 +23,7 @@ function Cart() {
                 setcartBooks(response.data.cart)
                 setloader(false)
             } catch (error) {
-                alert(error)
+                toast.error(error.response.data.message)
             }
         }
         fetch();
@@ -43,10 +44,10 @@ function Cart() {
 
         try {
             const response = await axios.post(`http://localhost:4000/api/v1/order-placed`, { order: cartBooks }, { headers });
-            alert(response.data.message);
+            toast.success(response.data.message);
             navigate("/profile/orderHistory");
         } catch (error) {
-            alert(error.response.data.message)
+            toast.error(error.response.data.message)
         }
     }
 
@@ -55,10 +56,10 @@ function Cart() {
         try {
             if (confirm("Are You sure to remove book from cart?")) {
                 const response = await axios.put(`http://localhost:4000/api/v1/remove-from-cart/${bookid}`, {}, { headers });
-                alert(response.data.message);
+                toast.success(response.data.message);
             }
         } catch (error) {
-            alert(error.response.data.message)
+            toast.error(error.response.data.message)
         }
     }
 

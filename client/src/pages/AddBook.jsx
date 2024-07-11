@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from "react-hook-form"
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 function AddBook() {
     const navigate = useNavigate();
@@ -27,16 +28,16 @@ function AddBook() {
             }
 
             const response = await axios.post('http://localhost:4000/api/v1/add-book', bookInfo, { headers });
-            alert(response.data.message);
+            toast.success(response.data.message);
             navigate("/all-books")
         } catch (error) {
-            alert(error.response.data.message);
+            toast.error(error.response.data.message);
         }
 
     }
 
     return (
-        <div className=" bg-zinc-900 min-h-screen h-auto">
+        <div className=" bg-zinc-900 min-h-screen py-10 md:py-0 h-auto">
             <form onSubmit={handleSubmit(onSubmit)} className=' bg-zinc-800 flex flex-col justify-center p-5 gap-5 rounded-xl w-full shadow-sm shadow-zinc-500 '>
                 <h1 className=' text-3xl text-center font-semibold  text-zinc-400'>Add New Book</h1>
                 <div className=' flex flex-col space-y-2  '>
@@ -54,7 +55,7 @@ function AddBook() {
                     <input placeholder='Enter author name' name='author' className=' bg-zinc-900  px-2 py-2 text-zinc-200  outline-none rounded-md' type='text' {...register("author", { required: true })} />
                     {errors.author && <span className=' text-red-400 text-sm'>This field is required</span>}
                 </div>
-                <div className='flex justify-between gap-10'>
+                <div className='flex justify-between md:gap-10 gap-2'>
                     <div className=' flex flex-col space-y-2 w-7/12 '>
                         <label className=' text-zinc-100 text-sm'>Language</label>
                         <input placeholder='Enter book language' name='language' className=' bg-zinc-900  px-2 py-2 text-zinc-200  outline-none rounded-md' type='text' {...register("language", { required: true })} />

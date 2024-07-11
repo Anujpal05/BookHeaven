@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import BookCard from '../BookCard';
 import { Hourglass } from "react-loader-spinner"
 import star from "../../assets/star.png"
+import toast from 'react-hot-toast';
 
 function Favourites() {
     const [favouriteBooks, setfavouriteBooks] = useState();
@@ -19,10 +20,9 @@ function Favourites() {
                 setfavouriteBooks(response.data.favouriteBooks);
                 setloader(false);
             } catch (error) {
-                alert(error.response.data.message)
+                toast.error(error.response.data.message)
             }
         }
-
         fetch();
     }, [favouriteBooks]);
 

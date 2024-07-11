@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { MdOutlineLogout } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from '../../store/auth';
+import toast from 'react-hot-toast';
 
 function Sidebar({ data }) {
     const dispatch = useDispatch();
@@ -15,12 +16,12 @@ function Sidebar({ data }) {
         localStorage.removeItem("token");
         localStorage.removeItem("id");
         localStorage.removeItem("role");
-        alert("LogOut successfully!")
+        toast.success("LogOut successfully!")
         navigate("/");
     }
 
     return (
-        <div className=' bg-zinc-800 p-4 md:h-full flex flex-col md:justify-between items-center  md:items-center rounded '>
+        <div className=' bg-zinc-800 p-4 md:h-[82vh] md:fixed flex flex-col md:justify-between items-center  md:items-center rounded '>
             <div className=' flex flex-col justify-center items-center'>
                 <img src={data.avatar} className=' h-[12vh]' />
                 <p className=' mt-2 text-xl text-zinc-100'>{data.username}</p>

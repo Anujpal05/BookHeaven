@@ -5,6 +5,8 @@ import bgAuthImage from "../assets/bgAuth.png";
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../store/auth';
+import toast from 'react-hot-toast';
+
 
 function SignIn() {
     const dispatch = useDispatch();
@@ -23,7 +25,7 @@ function SignIn() {
             }
 
             const response = await axios.post("http://localhost:4000/api/v1/signin", userInfo);
-            alert("LogIn Successfully!");
+            toast.success("LogIn Successfully!");
             dispatch(authActions.login());
             dispatch(authActions.changeRole(response.data.role))
             navigate('/profile');
@@ -31,19 +33,19 @@ function SignIn() {
             localStorage.setItem("id", response.data.id);
             localStorage.setItem("role", response.data.role);
             localStorage.setItem("token", response.data.token);
-            
+
         } catch (error) {
-            alert(error.response.data.message)
+            toast.error(error.response.data.message)
         }
     }
 
 
     return (
-        <div className=" bg-zinc-900 flex justify-center items-center min-h-screen gap-56">
+        <div className=" bg-zinc-900 flex justify-center items-center min-h-screen md:gap-20 lg:gap-56">
             <div className=' hidden md:flex' >
                 <img src={bgAuthImage} alt='Login' />
             </div>
-            <form onSubmit={handleSubmit(onSubmit)} className=' bg-zinc-800 flex flex-col justify-center p-7 gap-4 rounded-xl w-full m-5 mt-20 md:w-3/12 shadow-sm shadow-zinc-500 '>
+            <form onSubmit={handleSubmit(onSubmit)} className=' bg-zinc-800 flex flex-col justify-center p-7 gap-4 rounded-xl w-full m-5 mt-20 lg:w-3/12 md:w-9/12 shadow-sm shadow-zinc-500 '>
                 <h1 className=' text-2xl text-center font-semibold  text-zinc-200'>SignIn</h1>
                 <div className=' flex flex-col '>
                     <label className=' text-zinc-100 text-sm'>Username</label>

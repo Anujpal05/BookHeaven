@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 
 const BookCard = ({ data, favourite }) => {
@@ -13,9 +14,9 @@ const BookCard = ({ data, favourite }) => {
             }
 
             const response = await axios.put("http://localhost:4000/api/v1/remove-fav-book", {}, { headers });
-            alert(response.data.message)
+            toast.success(response.data.message)
         } catch (error) {
-            alert(error.response.data.message)
+            toast.error(error.response.data.message)
         }
     }
 

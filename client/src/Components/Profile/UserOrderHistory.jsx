@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Hourglass } from "react-loader-spinner";
 import { Link } from 'react-router-dom';
 import emptyOrder from "../../assets/empty-order.png";
+import toast from 'react-hot-toast';
 
 function UserOrderHistory() {
 
@@ -21,7 +22,7 @@ function UserOrderHistory() {
                 setorder(response.data.data);
                 setloader(false);
             } catch (error) {
-                alert(error.response.data.message)
+                toast.error(error.response.data.message)
             }
         }
 
@@ -52,30 +53,29 @@ function UserOrderHistory() {
 
             {order && order.length > 0 && <div className=' md:p-4 p-1 space-y-8'>
                 <h1 className=' text-4xl text-zinc-500 font-semibold'>Your Order History</h1>
-                <table className=' w-full bg-zinc-800'>
-                    <thead className=''>
-                        <tr className=' text-xl text-zinc-200 text-center border-2 border-zinc-700 '>
-                            <th className=' p-2 border-2 border-zinc-600 w-1/12'>Sr.</th>
-                            <th className=' p-2 border-2 border-zinc-600 w-3/12'>Books</th>
-                            <th className=' p-2 border-2 border-zinc-600 w-2/6'>Description</th>
-                            <th className=' p-2 border-2 border-zinc-600 w-1/6'>Price</th>
-                            <th className=' p-2 border-2 border-zinc-600 w-1/6 '>Status</th>
-                            <th className=' p-2 border-2 border-zinc-600 w-1/6'>Mode</th>
-                        </tr>
-                    </thead>
-                    <tbody className=' text-sm '>
+                <div className=' w-full bg-zinc-800'>
+                    <div className=' text-zinc-200 text-center border-[1px] border-zinc-700 flex text-sm md:text-xl  '>
+                        <div className=' p-2 border-[1px] flex justify-center items-center  border-zinc-600 w-[5%]'>Sr.</div>
+                        <div className=' p-2 border-[1px] flex justify-center items-center border-zinc-600 w-[25%]'>Books</div>
+                        <div className=' p-2 border-[1px] flex justify-center items-center border-zinc-600 w-[30%]'>Description</div>
+                        <div className=' p-2 border-[1px] flex justify-center items-center border-zinc-600 w-[10%]'>Price</div>
+                        <div className=' p-2 border-[1px] flex justify-center items-center border-zinc-600 w-[18%] '>Status</div>
+                        <div className=' p-2 border-[1px] flex justify-center items-center border-zinc-600 w-[13%]'>Mode</div>
+                    </div>
+                    <div className=' text-sm w-full '>
                         {order && order.map((items, i) => (
-                            <tr key={i} className=" text-sm h-8 font-semibold text-zinc-300 text-center border-2 border-zinc-600">
-                                <td className='p-2 border-2 border-zinc-600'>{i + 1}</td>
-                                <td className='p-2 border-2 border-zinc-600 hover:underline hover:text-blue-500 transition-all duration-300'><Link to={`/view-book-details/${items.book._id}`}>{items.book.title}</Link></td>
-                                <td className='p-2 border-2 border-zinc-600'>{items.book.desc.slice(0, 40)}...</td>
-                                <td className='p-2 border-2 border-zinc-600'>&#8377; {items.book.price}</td>
-                                <td className='p-2 border-2 border-zinc-600 text-green-500' >{items.status}</td>
-                                <td className='p-2 border-2 border-zinc-600'>COD</td>
-                            </tr>
+                            <div key={i} className="  font-semibold text-zinc-300 text-center border-[1px] text-[12px] md:text-sm  h-fit border-zinc-600 w-full flex">
+                                <div className='p-2 border-[1px] flex justify-center items-center border-zinc-600 w-[5%]'>{i + 1}</div>
+                                <div className='p-2 border-[1px] flex justify-center items-center border-zinc-600 hover:underline hover:text-blue-500 transition-all duration-300 w-[25%]'><Link to={`/view-book-details/${items.book._id}`}>{items.book.title}</Link></div>
+                                <div className='p-2 border-[1px] flex justify-center items-center border-zinc-600 w-[30%]'>{items.book.desc.slice(0, 40)}...</div>
+                                <div className='p-2 border-[1px] flex justify-center items-center border-zinc-600 w-[10%]'>&#8377; {items.book.price}</div>
+                                <div className='p-2 border-[1px] flex justify-center items-center border-zinc-600 text-green-500 w-[18%]' >{items.status === "Ordered Placed" ? (<p className=' text-yellow-500'>{items.status}</p>) : items.status === "Cancelled" ? (<p className='text-red-500'>{items.status}</p>) : items.status === "Delivered" ? (<p className=' text-blue-600'>{items.status}</p>) : (<p className=' text-green-500'>{items.status}</p>)}
+                                </div>
+                                <div className='p-2 border-[1px] flex justify-center items-center border-zinc-600 w-[13%]'>COD</div>
+                            </div>
                         ))}
-                    </tbody>
-                </table>
+                    </div>
+                </div>
             </div>
 
             }

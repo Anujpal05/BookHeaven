@@ -15,9 +15,9 @@ import Favourites from './Components/Profile/Favourites';
 import UserOrderHistory from './Components/Profile/UserOrderHistory';
 import Setting from './Components/Profile/Setting';
 import AddBook from './pages/AddBook';
-import UpdateBook from './pages/UpdateBook';
 import AllOrders from './Components/Profile/AllOrders';
-
+import BookUpdate from './pages/BookUpdate';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
 
@@ -35,6 +35,7 @@ function App() {
   return (
     <div>
       <Navbar />
+      <Toaster />
       <Routes>
         <Route exact path='/' element={<Home />} />
         <Route exact path='/all-books' element={<AllBook />} />
@@ -51,7 +52,7 @@ function App() {
           </>}
         </Route>
         {role == 'admin' && <>
-          <Route path='/update-book/:id' element={<UpdateBook />} />
+          <Route path='/update-book/:id' element={<BookUpdate />} />
         </>}
         <Route exact path='/signup' element={<SignUp />} />
         <Route exact path='/signin' element={<SignIn />} />

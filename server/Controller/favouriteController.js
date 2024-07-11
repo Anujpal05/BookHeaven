@@ -13,7 +13,7 @@ export const addFavBook = async (req, res) => {
     const favBook = await User.findByIdAndUpdate(id, {
       $push: { favourite: bookid },
     });
-    console.log(id, bookid);
+
     if (!favBook) {
       return res
         .status(400)

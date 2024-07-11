@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import { Hourglass } from "react-loader-spinner"
 import BookCard from '../Components/BookCard';
+import toast from 'react-hot-toast';
 
 function AllBook() {
 
@@ -15,7 +16,7 @@ function AllBook() {
                 setData(response.data.books);
                 setloader(false);
             } catch (error) {
-                console.log(error)
+                toast.error(error.response.data.message);
             }
         }
         fetch();

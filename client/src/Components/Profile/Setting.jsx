@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { Hourglass } from "react-loader-spinner";
 
 function Setting() {
@@ -21,7 +22,7 @@ function Setting() {
                 setValue({ address: response.data.userData.address });
                 setloader(false)
             } catch (error) {
-                alert(error.response.data.message);
+                toast.error(error.response.data.message);
             }
         }
         fetch();
@@ -37,9 +38,9 @@ function Setting() {
     const updateAddress = async () => {
         try {
             const response = await axios.put("http://localhost:4000/api/v1//update-address", Value, { headers });
-            alert(response.data.message);
+            toast.success(response.data.message);
         } catch (error) {
-            alert(error.response.data.message)
+            toast.error(error.response.data.message)
         }
     }
 

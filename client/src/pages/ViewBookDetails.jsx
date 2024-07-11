@@ -8,8 +8,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { useSelector } from 'react-redux';
-
-
+import toast from 'react-hot-toast';
 
 function ViewBookDetails() {
     const { id } = useParams();
@@ -18,6 +17,7 @@ function ViewBookDetails() {
     const isLogin = useSelector((state) => state.auth.isLogin);
     const role = useSelector((state) => state.auth.role);
     const navigate = useNavigate();
+
     const headers = {
         authorization: `Bearer ${localStorage.getItem("token")}`,
         id: localStorage.getItem("id"),
@@ -26,9 +26,13 @@ function ViewBookDetails() {
 
     useEffect(() => {
         const fetch = async () => {
-            const response = await axios.get(`http://localhost:4000/api/v1//get-book/${id}`);
-            setData(response.data.book);
-            setloader(false);
+            try {
+                const response = await axios.get(`http://localhost:4000/api/v1//get-book/${id}`);
+                setData(response.data.book);
+                setloader(false);
+            } catch (error) {
+                toast.error(error.response.data.message);
+            }
         }
         fetch();
     }, [])
@@ -36,18 +40,18 @@ function ViewBookDetails() {
     const handleFavourites = async () => {
         try {
             const response = await axios.put("http://localhost:4000/api/v1/add-fav-book", {}, { headers });
-            alert(response.data.message)
+            toast.success(response.data.message)
         } catch (error) {
-            alert(error.response.data.message)
+            toast.error(error.response.data.message)
         }
     }
 
     const handleCart = async () => {
         try {
             const response = await axios.put("http://localhost:4000/api/v1/add-to-cart", {}, { headers });
-            alert(response.data.message)
+            toast.success(response.data.message)
         } catch (error) {
-            alert(error.response.data.message)
+            toast.error(error.response.data.message)
         }
     }
 
@@ -55,11 +59,11 @@ function ViewBookDetails() {
         try {
             if (confirm("Are you sure to delete this book?")) {
                 const response = await axios.delete("http://localhost:4000/api/v1/delete-book", { headers });
-                alert(response.data.message)
+                toast.success(response.data.message)
                 navigate('/all-books');
             }
         } catch (error) {
-            alert(error.response.data.message);
+            toast.error(error.response.data.message);
         }
     }
 

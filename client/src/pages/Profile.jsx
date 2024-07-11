@@ -4,6 +4,7 @@ import { Hourglass } from "react-loader-spinner"
 import { Outlet } from 'react-router-dom';
 import Sidebar from '../Components/Profile/Sidebar';
 import MobileNav from '../Components/Profile/MobileNav';
+import toast from 'react-hot-toast';
 
 function Profile() {
     const [Profile, setProfile] = useState();
@@ -20,10 +21,9 @@ function Profile() {
                 setProfile(response.data.userData);
                 setloader(false)
             } catch (error) {
-                console.log(error)
+                toast.error(error.response.data.message);
             }
         }
-
         fetch();
     }, [])
 
@@ -43,7 +43,7 @@ function Profile() {
                     />
                 </div>
             }
-            <div className=' bg-zinc-900  flex flex-col md:flex-row text-white pt-24 py-6 px-10 gap-10 w-fit min-w-full min-h-screen'>
+            <div className=' bg-zinc-900  flex flex-col md:flex-row text-white pt-24 py-6 md:px-10 px-4 gap-10 w-fit max-w-full overflow-x-hidden min-w-full min-h-screen'>
                 {
                     Profile && <><div className=' w-full md:h-screen lg:w-1/6 md:w-1/4'>
                         <Sidebar data={Profile} />
