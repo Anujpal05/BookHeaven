@@ -25,7 +25,7 @@ function AllOrders() {
     useEffect(() => {
         const fetch = async () => {
             try {
-                const response = await axois.get("http://localhost:4000/api/v1/get-all-orders", { headers });
+                const response = await axois.get(`/api/v1/get-all-orders`, { headers });
                 setAllOrders(response.data.data);
                 setloader(false);
             } catch (error) {
@@ -39,7 +39,7 @@ function AllOrders() {
         try {
             const id = AllOrders[i]._id;
             setoptions(-1);
-            const response = await axois.put(`http://localhost:4000/api/v1//update-order/${id}`, Values, { headers });
+            const response = await axois.put(`/api/v1/update-order/${id}`, Values, { headers });
             toast.success(response.data.message);
         } catch (error) {
             toast.error(error.response.data.message);

@@ -16,7 +16,7 @@ function Favourites() {
     useEffect(() => {
         const fetch = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/api/v1/get-all-fav-books", { headers });
+                const response = await axios.get(`/api/v1/get-all-fav-books`, { headers });
                 setfavouriteBooks(response.data.favouriteBooks);
                 setloader(false);
             } catch (error) {
@@ -49,7 +49,7 @@ function Favourites() {
                 </div>
             }
             {favouriteBooks && favouriteBooks.length > 0 && <> <h1 className=' text-3xl text-zinc-500 font-semibold'>Your Favourite Books</h1>
-                <div className=' grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mt-10'>
+                <div className=' grid grid-cols-1 md:grid-cols-2 lg:grids-cols-3 lg:grid-cols-3 gap-6 mt-10'>
                     {favouriteBooks.map((items, i) => (
                         <div key={i}><BookCard data={items} favourite={true} /></div>
                     ))}

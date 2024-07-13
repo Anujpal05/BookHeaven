@@ -7,7 +7,7 @@ export const addBookToCart = async (req, res) => {
     const userData = await User.findById(id);
     const isBookInCart = userData.cart.includes(bookid);
     if (isBookInCart) {
-      return res.status(200).json({ message: "Book is already in cart!" });
+      return res.status(400).json({ message: "Book is already in cart!" });
     }
 
     const bookInCart = await User.findByIdAndUpdate(id, {

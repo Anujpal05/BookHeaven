@@ -1,11 +1,13 @@
 import User from "../Model/user.js";
 import Order from "../Model/order.js";
+import sendMail from "../mail/mail.js";
 
 //Place order
 export const placeOrder = async (req, res) => {
   try {
     const { id } = req.headers;
     const { order } = req.body;
+
     for (const orderData of order) {
       const newOrder = new Order({ user: id, book: orderData._id });
       const orderDataFromDB = await newOrder.save();
@@ -14,14 +16,17 @@ export const placeOrder = async (req, res) => {
       }
 
       //saving order in user model
-      await User.findByIdAndUpdate(id, {
+      const userorder = await User.findByIdAndUpdate(id, {
         $push: { orders: orderDataFromDB._id },
       });
+      const orderInfo = await Order.findById(newOrder._id)
+        .populate("book")
+        .populate("user");
+      sendMail(orderInfo);
 
       //clearing cart
       await User.findByIdAndUpdate(id, { $pull: { cart: orderData._id } });
     }
-
     return res.status(200).json({ message: "Order placed!" });
   } catch (error) {
     return res.status(500).json({ message: "Internal server error!" });
@@ -90,10 +95,15 @@ export const updateOrder = async (req, res) => {
       status: req.body.status,
     });
 
+    const orderInfo = await Order.findById(id)
+      .populate("user")
+      .populate("book");
+
     if (!orderData) {
       return res.status(404).json({ message: "Error while updating!" });
     }
 
+    sendMail(orderInfo);
     return res.status(200).json({ message: "Status updated successfully!" });
   } catch (error) {
     return res.status(500).json({ message: "Internal server error!" });

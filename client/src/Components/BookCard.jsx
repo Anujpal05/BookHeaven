@@ -13,7 +13,7 @@ const BookCard = ({ data, favourite }) => {
                 bookid: data._id
             }
 
-            const response = await axios.put("http://localhost:4000/api/v1/remove-fav-book", {}, { headers });
+            const response = await axios.put(`/api/v1/remove-fav-book`, {}, { headers });
             toast.success(response.data.message)
         } catch (error) {
             toast.error(error.response.data.message)

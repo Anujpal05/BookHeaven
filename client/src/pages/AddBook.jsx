@@ -27,7 +27,7 @@ function AddBook() {
                 language: data.language,
             }
 
-            const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/v1/add-book`, bookInfo, { headers });
+            const response = await axios.post(`/api/v1/add-book`, bookInfo, { headers });
             toast.success(response.data.message);
             navigate("/all-books")
         } catch (error) {

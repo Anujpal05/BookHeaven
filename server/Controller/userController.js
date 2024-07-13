@@ -1,6 +1,5 @@
 import User from "../Model/user.js";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import { generateToken } from "../auth/auth.js";
 
 //Register Controller

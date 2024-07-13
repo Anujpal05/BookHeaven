@@ -18,7 +18,7 @@ function UserOrderHistory() {
     useEffect(() => {
         const fetch = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/api/v1/get-user-orders", { headers })
+                const response = await axios.get(`/api/v1/get-user-orders`, { headers })
                 setorder(response.data.data);
                 setloader(false);
             } catch (error) {

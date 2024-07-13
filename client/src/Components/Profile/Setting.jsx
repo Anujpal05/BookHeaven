@@ -17,7 +17,7 @@ function Setting() {
     useEffect(() => {
         const fetch = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/api/v1/get-user-data", { headers });
+                const response = await axios.get(`/api/v1/get-user-data`, { headers });
                 setuserData(response.data.userData);
                 setValue({ address: response.data.userData.address });
                 setloader(false)
@@ -37,7 +37,7 @@ function Setting() {
 
     const updateAddress = async () => {
         try {
-            const response = await axios.put("http://localhost:4000/api/v1//update-address", Value, { headers });
+            const response = await axios.put(`/api/v1///update-address`, Value, { headers });
             toast.success(response.data.message);
         } catch (error) {
             toast.error(error.response.data.message)

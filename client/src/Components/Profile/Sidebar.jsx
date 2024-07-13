@@ -43,7 +43,7 @@ function Sidebar({ data }) {
                 }
             </div>
             <div className=' mt-5'>
-                <button className=' flex justify-center items-center gap-2 text-md font-semibold bg-zinc-900 px-10 md:px-5  py-2 rounded hover:bg-zinc-100 hover:text-zinc-800 transition-all duration-300 ' onClick={handleLogOut}>Log Out <MdOutlineLogout className=' text-xl' /></button>
+                <button className=' flex justify-center items-center gap-2 text-md font-semibold bg-zinc-900 px-10 md:px-5  py-2 rounded hover:bg-zinc-100 hover:text-zinc-800 transition-all duration-300 outline-none ' onClick={handleLogOut}>Log Out <MdOutlineLogout className=' text-xl' /></button>
             </div>
         </div>
     )

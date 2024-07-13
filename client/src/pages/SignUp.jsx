@@ -24,7 +24,7 @@ function SignUp() {
                 address: data.address
             }
 
-            const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/v1/signup`, userInfo);
+            const response = await axios.post(`/api/v1/signup`, userInfo);
             toast.success("SignUp successfully!")
             navigate("/signin");
 
