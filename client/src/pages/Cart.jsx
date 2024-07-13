@@ -19,7 +19,7 @@ function Cart() {
     useEffect(() => {
         const fetch = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/api/v1/get-user-cart", { headers });
+                const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/v1/get-user-cart`, { headers });
                 setcartBooks(response.data.cart)
                 setloader(false)
             } catch (error) {
@@ -43,7 +43,7 @@ function Cart() {
     const placeOrder = async () => {
 
         try {
-            const response = await axios.post(`http://localhost:4000/api/v1/order-placed`, { order: cartBooks }, { headers });
+            const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/v1/order-placed`, { order: cartBooks }, { headers });
             toast.success(response.data.message);
             navigate("/profile/orderHistory");
         } catch (error) {
@@ -55,7 +55,7 @@ function Cart() {
     const removeCartBook = async (bookid) => {
         try {
             if (confirm("Are You sure to remove book from cart?")) {
-                const response = await axios.put(`http://localhost:4000/api/v1/remove-from-cart/${bookid}`, {}, { headers });
+                const response = await axios.put(`${import.meta.env.VITE_SERVER_URL}/api/v1/remove-from-cart/${bookid}`, {}, { headers });
                 toast.success(response.data.message);
             }
         } catch (error) {

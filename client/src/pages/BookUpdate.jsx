@@ -26,7 +26,7 @@ function BookUpdate() {
     useEffect(() => {
         const fetch = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/api/v1/get-book/${id}`, { headers });
+                const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/v1/get-book/${id}`, { headers });
                 setbookData(response?.data?.book);
                 setloader(false);
             } catch (error) {
@@ -49,7 +49,7 @@ function BookUpdate() {
                     language: bookData.language,
                 }
 
-                const response = await axios.put('http://localhost:4000/api/v1/update-book', bookInfo, { headers });
+                const response = await axios.put(`${import.meta.env.VITE_SERVER_URL}/api/v1/update-book`, bookInfo, { headers });
                 toast.success(response.data.message);
                 navigate(`/view-book-details/${id}`)
             } else {

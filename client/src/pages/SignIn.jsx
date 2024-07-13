@@ -24,7 +24,7 @@ function SignIn() {
                 password: data.password
             }
 
-            const response = await axios.post("http://localhost:4000/api/v1/signin", userInfo);
+            const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/v1/signin`, userInfo);
             toast.success("LogIn Successfully!");
             dispatch(authActions.login());
             dispatch(authActions.changeRole(response.data.role))
@@ -33,6 +33,16 @@ function SignIn() {
             localStorage.setItem("id", response.data.id);
             localStorage.setItem("role", response.data.role);
             localStorage.setItem("token", response.data.token);
+
+            //After 2 hour jwt token expire so that show alert message to login again and authometically logout
+            setTimeout(() => {
+                alert("Your session expire! Please login again!")
+                dispatch(authActions.logout());
+                localStorage.removeItem('id');
+                localStorage.removeItem('role');
+                localStorage.removeItem("token");
+                navigate("/");
+            }, 7200000);
 
         } catch (error) {
             toast.error(error.response.data.message)
