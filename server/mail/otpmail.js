@@ -24,7 +24,7 @@ const sendMail = (userData) => {
   });
 
   let mailOptions = {
-    from: "Admin", // Sender address
+    from: `"Admin" ${process.env.SENDER}`, // Sender address
     to: `${userData.email}`, // List of recipients
     subject: `Your OTP for Secure Access `, // Subject line
     text: "Your OTP for Secure Access", // Plain text body
