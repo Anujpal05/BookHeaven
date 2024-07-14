@@ -1,6 +1,6 @@
 # Book Heaven
 
-Book Heaven is a web application that allows users to browse books, see book details , purchase books after logging in, add books to their cart and favorites, and check order status. Admins have special functionalities to manage books and user orders and regular order updates on email id.
+Book Heaven is a web application that allows users to browse books, see book details , purchase books after logging in, add books to their cart and favorites, and check order status. Admins have special functionalities to manage books and user orders and regular order updates on Email.
 
 ## Features
 
