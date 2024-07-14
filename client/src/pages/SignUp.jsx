@@ -17,19 +17,38 @@ function SignUp() {
 
     const onSubmit = async (data) => {
         try {
-            const userInfo = {
+
+            const headers = {
                 username: data.username,
-                email: data.email,
-                password: data.password,
-                address: data.address
+                email: data.email
             }
 
-            const response = await axios.post(`/api/v1/signup`, userInfo);
-            toast.success("SignUp successfully!")
-            navigate("/signin");
+            await axios.get(`${import.meta.env.VITE_SERVER_URL}/generate-otp`, { headers: headers });
+            const Otp = await prompt("Enter Your Otp");
 
+            if (Otp) {
+                let userOtp = parseInt(Otp);
+
+                const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/verify-otp`, { userOtp });
+                if (res.data.message) {
+                    const userInfo = {
+                        username: data.username,
+                        email: data.email,
+                        password: data.password,
+                        address: data.address,
+                    }
+
+                    const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/v1/signup`, userInfo);
+                    toast.success("SignUp successfully!")
+                    navigate("/signin");
+                } else {
+                    toast.error("Wrong OTP! Try again!");
+                }
+            } else {
+                toast.error("Try Again!");
+            }
         } catch (error) {
-            toast.error(error.response.data.message)
+            toast.error(error.response.data.message || "Server Error!");
         }
     }
 
@@ -61,7 +80,7 @@ function SignUp() {
                     <textarea rows={4} placeholder='address' className=' bg-zinc-700 px-2 py-1 text-zinc-200  outline-none rounded-md' type='text' {...register("address", { required: true })} />
                     {errors.address && <span className=' text-red-400 text-sm'>This field is required</span>}
                 </div>
-                <button type='submit' className=' bg-blue-500 p-1 font-semibold text-xl text-white rounded-md hover:bg-blue-600 hover:text-zinc-200 transition-all duration-500'>SignUp</button>
+                <button type='submit' className=' bg-blue-500 p-1 font-semibold text-xl text-white rounded-md hover:bg-blue-600 hover:text-zinc-200 transition-all duration-500' >SignUp</button>
                 <div className=' flex flex-col '>
                     <p className=' text-center text-zinc-100 font-semibold'>Or</p>
                     <p className=' text-zinc-600 font-semibold text-center'>Already have an account? <Link to={"/signin"} className=' underline hover:text-blue-500 transition-all duration-300'>LogIn</Link></p>
