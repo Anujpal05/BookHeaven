@@ -1,15 +1,17 @@
 # Book Heaven
 
-Book Heaven is a web application that allows users to browse books, see book details , purchase books after logging in, add books to their cart and favorites, and check order status. Admins have special functionalities to manage books and user orders.
+Book Heaven is a web application that allows users to browse books, see book details , purchase books after logging in, add books to their cart and favorites, and check order status. Admins have special functionalities to manage books and user orders and regular order updates on email id.
 
 ## Features
 
 ### User Features
 - View book details with prices
+- Registration using OTP verification on email
 - Order books after logging in
 - Add books to cart
 - Add books to favorites
 - View order status
+- Get order related email
 
 ### Admin Features
 - View user orders and data
@@ -26,6 +28,7 @@ Book Heaven is a web application that allows users to browse books, see book det
 - **Backend:** Node.js, Express.js
 - **Database:** MongoDB Atlas
 - **Responsive Design:** Mobile-friendly design
+- **Nodemailer:** Get Order related email
 
 ## Installation
 
