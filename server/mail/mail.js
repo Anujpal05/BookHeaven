@@ -14,7 +14,7 @@ const sendMail = (orderInfo) => {
 
     // Set up email data
     let mailOptions = {
-      from: process.env.SENDER, // Sender address
+      from: `"Admin" ${process.env.SENDER}`, // Sender address
       to: orderInfo.user.email, // List of recipients
       subject: `Your Order Confirmation - Order ${orderInfo._id}`, // Subject line
       text: "Order Information", // Plain text body
